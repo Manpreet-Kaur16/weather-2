@@ -1,99 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather-2</title>
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
 <body class="bg-slate-100">
-    <div class=" min-h-screen flex bg-gray-500 border border-blue-700 justify-center">
-        <div class="shadow-xl rounded-xl p-10 w-full max-w-lg bg-gray-700 text-center">
-            <h1 class="text-white">📍Home</h1>
-    <h1 class="font-bold text-4xl text-white mt-2">Woodstock</h1>
-    <h1 class="font-bold text-6xl text-white mt-4">13</h1>
-    <h1 class="text-gray-300 mt-2">Feels like: -9&deg;c</h1>
-    <div class="flex justify-center gap-4 text-white mt-2">
-        <h1>H:-2</h1>
-        <h1>L:-9</h1>
-    </div>
-    <div class="shadow-xl rounded-xl p-10 w-full max-w-lg bg-gray-500 mt-6">
-    <p class="text-white">weather alart be carefull!!! Rain expected in few mintues</p>
-    <hr>
-    <div class="flex flex-row gap-4 text-white">
-    <div>
-        <h1>now</h1>
-        <h1>☁️</h1>
-        <h1>-3</h1>
-    </div>
-    <div>
-        <h1>5pm</h1>
-        <h1>☁️</h1>
-        <h1>-3</h1>
-    </div>
-    <div>
-        <h1>6pm</h1>
-        <h1>☁️</h1>
-        <h1>-3</h1>
-    </div>
-    <div>
-        <h1>7pm</h1>
-        <h1>☁️</h1>
-        <h1>-3</h1>
-    </div>
-    <div>
-        <h1>8pm</h1>
-        <h1>🌦️</h1>
-        <h1>-3</h1>
-    </div>
-    <div>
-        <h1>9pm</h1>
-        <h1>☁️</h1>
-        <h1>-3</h1>
-    </div>
-    <div>
-        <h1>10pm</h1>
-        <h1>☁️</h1>
-        <h1>-3</h1>
-    </div>
-    <div>
-        <h1>11pm</h1>
-        <h1>☁️</h1>
-        <h1>-3</h1>
-    </div>
-    
-    </div>
-    <div class="shadow-xl rounded-xl p-10 w-full max-w-lg bg-gray-300 mt-6">
-        <h1 class="text-left">📅3-Day Forcast</h1>
-        <hr>
-        <div>
-            <div class="flex flex-row gap-4 mt-2">
-                <h1>Today</h1>
-                <h1>🌦️</h1>
-                <h1>-9</h1>
-                <progress></progress>
-                <h1>-7</h1>
+    <div class=" min-h-screen flex items-center justify-center bg-gray-100 p-4 border border-red-700 w-full">
+        <div class="bg-white shadow-xl rounded-xl p-10 w-full max-w-lg text-center">
+            <h1 class="text-4xl font-bold border border-white-700 bg-blue-500 text-white w-full px-4 py-2 rounded-xl">
+                Weather</h1>
+            <div>
+                <input id="inputField" type="text" placeholder="Enter your city here..." name="title"
+                    class=" px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 mt-3 gap-4" />
+                <button class="bg-blue-500 text-white text-md px-4 py-2 rounded" id="searchButton">Search</button>
             </div>
-            <div class="flex flex-row gap-4 mt-2">
-                <h1>Mon</h1>
-                <h1>🌦️</h1>
-                <h1>-9</h1>
-                <progress></progress>
-                <h1>-7</h1>
-            </div>
-            <div class="flex flex-row gap-4 mt-2">
-                <h1>Tue</h1>
-                <h1>🌦️</h1>
-                <h1>-11</h1>
-                <progress></progress>
-                <h1>-7</h1>
-            </div>
+            <hr class="border-t border-gray-300 my-4 w-full">
+
+            <div id="content"></div>
         </div>
     </div>
-    </div>
-    </div>
-    
-    </div>
-    
+
+
+    <script src="scripit.js"></script>
 </body>
+
 </html>
