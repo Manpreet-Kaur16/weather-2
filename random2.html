@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RandomProducts2</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-zinc-200">
+
+    <h1 class="text-2xl font-bold text-center">Random Products</h1>
+    <div class="flex justify-center mb-16">
+        <input id="inputField" type="text" class="bg-white border-1 px-4 py-2" />
+        <button class="bg-gray-500 text-white text-md px-4 py-2" id="searchButton">Search</button>
+    </div>
+    <p id="totalItems" class="text-center">Total Items Available</p>
+    <select class="w-50 bg-white p-2 border-1 rounded-lg text-center" id="selectOption">
+        <option value="">Select option</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+
+    <div id="paginationContent"></div>
+
+    <div id="randomProductContainer" class="flex flex-wrap"></div>
+
+    <script>
+        let totalItemsElement = document.getElementById("totalItems");
+        let selectElement = document.getElementById("selectOption");
+        let paginationContent = document.getElementById("paginationContent");
+        const randomProductContainer = document.getElementById("randomProductContainer");
+        async function getRandomProducts(item = "", number = 10, page = 1) {
+            try {
+                let apiResponse = await fetch(`https://api.freeapi.app/api/v1/public/randomproducts?query=${item}&limit=${number}&page=${page}`);
+                console.log(apiResponse);
+                let jsonData = await apiResponse.json();
+                console.log({ jsonData });
+
+                displayRandomProducts(jsonData.data.data);
+                displayPaginationData(jsonData.data);
+            }
+            catch (error) {
+                console.log(error);
+                console.log("error in getRandomProducts");
+
+            }
+            finally {
+                console.log("finally");
+            }
+        }
+        getRandomProducts();
+
+
+        function displayRandomProducts(products) {
+            //console.log({ products });
+            totalItemsElement.innerText = `Total Items Available = ${products.length}`
+            let html = products.map(product => {
+                return `<div class="border-1 border-zinc-400 p-2 px-10 m-4 bg-white rounded-[80px] w-2xl">
+        <img src="${product.thumbnail}" class="w-[200px] rounded-[80px]" />
+        <div class="pb-12">
+            <h1 class="text-2xl font-bold">${product.title}</h1>
+            <p class="text-md bg-zinc-500 text-white p-2 rounded-full max-w-xl">${product.description}</p>
+            <div class="flex items-center justify-start gap-2 mt-4">
+                <p class="text-md bg-zinc-800 text-white p-2 rounded-full">${product.price}</p>
+                <p class="text-md bg-zinc-800 text-white p-2 rounded-full">${product.brand}</p>
+                <p class="text-md bg-zinc-800 text-white p-2 rounded-full">${product.category}</p>
+                <p class="text-md bg-zinc-800 text-white p-2 rounded-full">${product.rating}</p>       
+            </div>
+            <div class="flex mt-4 gap-2">
+             ${product.images.map((image) => {
+                    // console.log(image);
+                    return `<img class="w-[60px]" src="${image}"/>`
+                }).join("")
+                    }
+                </div>
+        </div>
+    </div>`
+
+            }).join("");
+            randomProductContainer.innerHTML = html;
+        }
+        let inputFieldElement = document.getElementById("inputField");
+        let searchButtonElement = document.getElementById("searchButton");
+
+        searchButtonElement.addEventListener("click", () => {
+
+            //console.log(inputFieldElement.value);
+            getRandomProducts(inputFieldElement.value, selectElement.value);
+
+        })
+        selectElement.addEventListener("click", () => {
+            // console.log(selectElement.value);
+            getRandomProducts(inputFieldElement.value, selectElement.value);
+        })
+
+        function displayPaginationData(paginationData) {
+            console.log(paginationData.previousPage, paginationData.nextPage);
+            paginationContent.innerHTML = `<div class="flex justify-between px-4 py-2" >
+        <p class="text-md" id="paging"> Showing page no ${paginationData.page} out of ${paginationData.totalPages} Pages</p>
+        <div class="flex justify-end gap-2">
+            <button class="${paginationData.previousPage ? "bg-gray-500" : "bg-gray-100"} text-white text-md px-4 py-2" id="previousButton" ${paginationData.previousPage ? "" : "disabled"}>Previous</button>
+            <button class=" ${paginationData.nextPage ? "bg-gray-500" : "bg-gray-100"} text-white text-md px-4 py-2" id="nextButton" ${paginationData.nextPage ? "" : "disabled"}>Next</button>
+        </div>
+    </div>`
+
+            let previousButtonElement = document.getElementById("previousButton");
+            let nextButtonElement = document.getElementById("nextButton");
+            previousButtonElement.addEventListener("click", () => {
+                console.log("Hello previousButton");
+                if (paginationData.previousPage) {
+                    getRandomProducts(inputFieldElement.value, selectElement.value, paginationData.page - 1);
+                }
+
+            })
+            nextButtonElement.addEventListener("click", () => {
+                console.log("Hello nextButton", paginationData.nextPage);
+                if (paginationData.nextPage) {
+                    getRandomProducts(inputFieldElement.value, selectElement.value, paginationData.page + 1);
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</htm
