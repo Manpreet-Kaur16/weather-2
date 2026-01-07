@@ -9,17 +9,23 @@
 </head>
 
 <body>
-    <div>
-        <label for="email">Email</label>
-        <input type="email" class="border-1" />
-
-        <label for="password">Password</label>
-        <input type="password" class="border-1" />
-
-        <label for="Username">Username</label>
-        <input type="text" class="border-1" />
-
-        <button class="bg-blue-500 rounded px-4 py-2 text-white">Submit</button>
+    <div class="flex flex-col justify-center items-center border bg-gray-100 w-[600px] mx-auto mt-16">
+        <h1 class="font-bold text-xl justify-center"> Log in Page </h1>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" class="border bg-gray-300 mt-2" />
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" class="border bg-gray-300 mt-2" />
+        </div>
+        <div>
+            <label for="Username">Username</label>
+            <input type="text" class="border bg-gray-300 mt-2" />
+            <div class="flex justify-center">
+                <button class="bg-gray-500 rounded px-2 py-1 text-white mt-2 mb-2 ">Submit</button>
+            </div>
+        </div>
     </div>
 </body>
 
