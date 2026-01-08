@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserLogIn</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <div class="flex flex-col justify-center items-center border bg-gray-100 w-[600px] mx-auto mt-16">
+        <h1 class="font-bold text-xl justify-center"> Log in Page </h1>
+
+        <div>
+            <label for="Username">Username</label>
+            <input type="text" class="border bg-gray-300 mt-2" id="Username" />
+            <div>
+                <label for="password">Password</label>
+                <input type="password" class="border bg-gray-300 mt-2" id="password" />
+            </div>
+
+            <div class="flex justify-center">
+                <button class="bg-gray-500 rounded px-2 py-1 text-white mt-2 mb-2" id="Submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let buttonElement = document.getElementById("Submit");
+        let passwordElement = document.getElementById("password");
+        let usernameElement = document.getElementById("Username");
+        buttonElement.addEventListener("click", () => {
+            let user = { password: passwordElement.value, username: usernameElement.value };
+            console.log("submitted sucessfully", user);
+
+            UserLogIn(user);
+
+        })
+
+        async function UserLogIn(user) {
+            try {
+                let apiResponse = await fetch("https://api.freeapi.app/api/v1/users/login", {
+                    method: "POST",
+                    headers: { accept: 'application/json', 'content-type': 'application/json' },
+                    body: JSON.stringify(user)
+                });
+                let JSONData = await apiResponse.json();
+                console.log(apiResponse);
+                console.log(JSONData);
+
+            }
+            catch (error) {
+                console.log(error);
+            }
+
+        }
+    </script>
+</body>
+
+</html>

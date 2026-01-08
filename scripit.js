@@ -1,6 +1,7 @@
 let html = "";
 let inputFieldElement = document.getElementById("inputField");
 let searchbuttonElement = document.getElementById("searchButton")
+
 const getWeatherData = ((location = "Sangrur") => {
     let apiResponse = fetch(`https://api.weatherapi.com/v1/forecast.json?key=09e7a1b8b2844ba990b110125243108&q=${location}&days=7&aqi=yes&alerts=no`);
     console.log(apiResponse)
