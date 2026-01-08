@@ -13,20 +13,52 @@
         <h1 class="font-bold text-xl justify-center"> Log in Page </h1>
         <div>
             <label for="email">Email</label>
-            <input type="email" class="border bg-gray-300 mt-2" />
+            <input type="email" class="border bg-gray-300 mt-2" id="email" />
         </div>
         <div>
             <label for="password">Password</label>
-            <input type="password" class="border bg-gray-300 mt-2" />
+            <input type="password" class="border bg-gray-300 mt-2" id="password" />
         </div>
         <div>
             <label for="Username">Username</label>
-            <input type="text" class="border bg-gray-300 mt-2" />
+            <input type="text" class="border bg-gray-300 mt-2" id="Username" />
             <div class="flex justify-center">
-                <button class="bg-gray-500 rounded px-2 py-1 text-white mt-2 mb-2 ">Submit</button>
+                <button class="bg-gray-500 rounded px-2 py-1 text-white mt-2 mb-2" id="Submit">Submit</button>
             </div>
         </div>
     </div>
+    <script>
+
+        let emailElement = document.getElementById("email");
+        let passwordElement = document.getElementById("password");
+        let usernameElement = document.getElementById("Username");
+        let SubmitButton = document.getElementById("Submit");
+        SubmitButton.addEventListener("click", () => {
+            let user = {
+                email: emailElement.value,
+                password: passwordElement.value,
+                username: usernameElement.value
+            }
+            userRegister(user);
+            console.log(user);
+            console.log(emailElement.value, passwordElement.value, usernameElement.value);
+        })
+        async function userRegister(user) {
+            try {
+                let apiResponse = await fetch("https://api.freeapi.app/api/v1/users/register", {
+                    method: "POST",
+                    headers: { accept: 'application/json', 'content-type': 'application/json' },
+                    body: JSON.stringify(user)
+                });
+                console.log(apiResponse);
+                let JSONData = await apiResponse.json();
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+
+    </script>
 </body>
 
 </html>
