@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoAppwithApi</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .todo-item {
+            transition: background-color 0.2s;
+        }
+
+        .todo-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .todo-item+.todo-item {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">ToDo App</h1>
+            <p class="text-gray-600">Organize your tasks efficiently</p>
+        </header>
+        <main>
+            <section class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex gap-4">
+                    <div>
+                        <label for="Add Tasks" class="block text-sm font-medium text-gray-700 mb-2 text-center">Add New
+                            Tasks</label>
+                        <input type="text" placeholder="Enter Tasks here"
+                            class="border border-gray-300 px-4 py-3 rounded-lg" id="inputField" />
+                    </div>
+                    <div class="flex-1 mt-8">
+                        <button class="bg-blue-700 rounded-lg border-gray-300 px-4 py-1 text-white"
+                            id="addtask">Add-Task</button>
+                        <button class="bg-red-700 rounded-lg border-gray px-4 py-1 text-white">Delete-All</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 mb-6">
+
+                <div class="flex gap-6">
+
+                    <div>
+                        <h1 class="font-bold text-2xl mb-4">Filter Tasks</h1>
+
+                        <label class="block mb-4">Quick Filter </label>
+                        <select class=" w-[340px] border border-gray-300 rounded-lg">
+                            <option>All</option>
+                            <option>Checked</option>
+                            <option>Unchecked</option>
+                        </select>
+
+                        <h1 class="font-bold mt-4">Detailed Filter</h1>
+                        <div>
+                            <div class="flex items-center">
+                                <input id="all" value="all" type="radio" name="status" class="mr-2" />
+                                <label for="all" class="text-sm">All</label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input id="complete" value="complete" type="radio" name="status" class="mr-2" />
+                                <label for="complete" class="text-sm">Completed</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="incomplete" value="incomplete" type="radio" name="status" class="mr-2" />
+                                <label for="incomplete" class="text-sm">Incomplete</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-2xl mb-4">
+                            Sort &Search
+                        </h1>
+                        <div>
+                            <label class="block">Sort By </label>
+                            <select class=" w-[340px] border border-gray-300 rounded-lg">
+                                <option>All</option>
+                                <option>Checked</option>
+                                <option>Unchecked</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="border border-gray-800 bg-white" id="toDoContainer">
+                </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="scripit.js"></script>
+
+</body>
+
+</html>
