@@ -36,8 +36,15 @@
             let loadingElement = document.getElementById("loading");
             let selectElement = document.getElementById("selectOption");
             let paginationContent = document.getElementById("paginationContent");
+
+            let url = window.location.search;
+            let searchParams = new URLSearchParams(url);
+            let pageLimit = searchParams.get("limit")
+            selectElement.value = pageLimit;
             async function getUserData(number = 5, page = 1) {
                 loadingElement.style.display = "block";
+                updateQueryParam('page', page);
+                updateQueryParam('limit', number);
                 try {
                     let apiResponse = await fetch(`https://api.freeapi.app/api/v1/public/randomusers?limit=${number}&page=${page}`);
                     console.log(apiResponse);
@@ -98,6 +105,7 @@
         </div>
     </div>`
 
+
                 let previousButtonElement = document.getElementById("previousButton");
                 let nextButtonElement = document.getElementById("nextButton");
                 previousButtonElement.addEventListener("click", () => {
@@ -105,7 +113,6 @@
                     if (paginationData.previousPage) {
                         getUserData(selectElement.value, paginationData.page - 1);
                     }
-
                 })
                 nextButtonElement.addEventListener("click", () => {
                     console.log("Hello nextButton", paginationData.nextPage);
@@ -114,8 +121,40 @@
                     }
                 })
             }
+            /**
+     * Updates a specific query parameter in the current URL without reloading the page.
+     * @param {string} key The parameter key.
+     * @param {string} value The parameter value.
+     */
+            function updateQueryParam(key, value) {
+                const url = new URL(window.location.href);
 
-            getUserData();
+                // Set the new parameter
+                url.searchParams.set(key, value);
+
+                // Use the History API to update the URL in the address bar
+                // pushState(state object, title, URL)
+                window.history.pushState({ path: url.href }, '', url.href);
+
+                // Optional: if you don't want a new history entry, use replaceState instead:
+                // window.history.replaceState({ path: url.href }, '', url.href);
+            }
+
+            // Example usage:
+            // This will change the URL from (e.g.) www.example.com?page=1 to www.example.com?page=2
+            // without refreshing the page.
+
+            if (searchParams.has("page")) {
+                let pageNumber = searchParams.get("page");
+                if (searchParams.has("limit")) {
+                    pageLimit = searchParams.get("limit")
+                }
+                getUserData(pageLimit, pageNumber);
+            }
+            else {
+                getUserData();
+            }
+
         </script>
     </table>
 </body>
